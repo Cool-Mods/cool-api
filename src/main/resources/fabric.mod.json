@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "coolapi",
+	"version": "${version}",
+	"name": "Cool Api",
+	"description": "Specially for Cool Mods by Ray Lirov",
+	"authors": [
+		"Ray_Lirov, _TiN__"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/rays-cool-api",
+		"sources": ""
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/coolapi/icon.gif",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.raylirov.coolapi.CoolApi"
+		],
+		"client": [
+			"net.raylirov.coolapi.CoolApiClient"
+		],
+		"fabric-datagen": [
+			"net.raylirov.coolapi.CoolApiDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

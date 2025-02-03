@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "coolapi:item/tinted_upgrade_smithing_template"
+  }
+}

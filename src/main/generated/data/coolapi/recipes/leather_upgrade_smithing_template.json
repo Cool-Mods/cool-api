@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "I": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "coolapi:leather_upgrade_smithing_template"
+    }
+  },
+  "pattern": [
+    "DTD",
+    "DID",
+    "DDD"
+  ],
+  "result": {
+    "count": 2,
+    "item": "coolapi:leather_upgrade_smithing_template"
+  },
+  "show_notification": true
+}
