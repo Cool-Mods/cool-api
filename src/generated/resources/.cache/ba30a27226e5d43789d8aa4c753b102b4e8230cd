@@ -1,0 +1,8 @@
+// 1.20.1	2025-01-25T23:24:10.9348806	Tags for minecraft:item mod id coolapi
+27e204902976d8fe13a30a245c402b63e03d3ab5 data/coolapi/tags/items/diamond_armor.json
+742d0809ac433cd781625e58646a272e91f056a5 data/coolapi/tags/items/iron_armor.json
+ddcfeb03849cc33c36357875a58eeb08335f7c7f data/coolapi/tags/items/leather_armor_boots.json
+42c124bc504a07210b7fa52f0c203a2d4d4fefcc data/coolapi/tags/items/netherite_armor_boots.json
+bec1c5abb7b7d1e4de7e40d05be4354ecd69e8e5 data/coolapi/tags/items/netherite_armor_chestplate.json
+e68a63b40b03aaacb0f256893afb47834d7c255a data/coolapi/tags/items/netherite_armor_helmet.json
+7fc4aafef637f133256d72c6bd6f3b7f294bd04e data/coolapi/tags/items/netherite_armor_leggings.json

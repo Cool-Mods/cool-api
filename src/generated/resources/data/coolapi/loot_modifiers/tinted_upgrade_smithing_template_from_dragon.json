@@ -1,0 +1,10 @@
+{
+  "type": "coolapi:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/ender_dragon"
+    }
+  ],
+  "item": "coolapi:tinted_upgrade_smithing_template"
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "coolapi:turtle_upgrade_smithing_template"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_turtle_upgrade_smithing_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "coolapi:turtle_upgrade_smithing_template"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_turtle_upgrade_smithing_template",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "coolapi:turtle_upgrade_smithing_template"
+    ]
+  },
+  "sends_telemetry_event": false
+}

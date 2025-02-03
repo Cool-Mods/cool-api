@@ -1,0 +1,10 @@
+{
+  "entries": [
+    "coolapi:leather_upgrade_smithing_template_from_igloo",
+    "coolapi:turtle_upgrade_smithing_template_from_ruin",
+    "coolapi:wooled_upgrade_smithing_template_from_warden",
+    "coolapi:tinted_upgrade_smithing_template_from_dragon",
+    "coolapi:gilded_upgrade_smithing_template_from_bastion"
+  ],
+  "replace": false
+}

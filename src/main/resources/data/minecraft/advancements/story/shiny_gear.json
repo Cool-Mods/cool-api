@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:story/mine_diamond",
+  "criteria": {
+    "diamond_armor": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "coolapi:diamond_armor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.story.shiny_gear.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:diamond_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.story.shiny_gear.title"
+    }
+  },
+  "requirements": [
+    [
+      "diamond_armor"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
