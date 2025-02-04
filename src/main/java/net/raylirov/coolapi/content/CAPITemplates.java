@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.raylirov.coolapi.CoolApi;
 import net.raylirov.coolapi.main.utils.CAPIHelper;
 
-public class CAPIItems {
+public class CAPITemplates {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, CoolApi.MOD_ID);
 

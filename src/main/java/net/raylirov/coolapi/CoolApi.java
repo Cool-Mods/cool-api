@@ -3,9 +3,10 @@ package net.raylirov.coolapi;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.raylirov.coolapi.content.CAPIItems;
+import net.raylirov.coolapi.content.CAPITemplates;
 import net.raylirov.coolapi.main.utils.loot.CAPILootModifiers;
 import org.slf4j.Logger;
 
@@ -18,8 +19,10 @@ public class CoolApi {
     {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        CAPIItems.register(eventBus);
-        CAPILootModifiers.register(eventBus);
+        if (ModList.get().isLoaded("coolarmor") || ModList.get().isLoaded("coolarmorexperiments")) {
+            CAPITemplates.register(eventBus);
+            CAPILootModifiers.register(eventBus);
+        }
 
         MinecraftForge.EVENT_BUS.register(this);
     }

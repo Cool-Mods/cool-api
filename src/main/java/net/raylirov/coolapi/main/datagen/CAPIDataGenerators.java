@@ -25,7 +25,7 @@ public class CAPIDataGenerators {
         generator.addProvider(event.includeClient(), new CAPILanguageGenerator(packOutput,  "en_us"));
         generator.addProvider(event.includeClient(), new CAPILanguageGenerator(packOutput,  "ru_ru"));
         generator.addProvider(event.includeServer(), new CAPIRecipeGenerator(packOutput));
-        generator.addProvider(event.includeServer(), new CAPIItemModelGenerator(packOutput, existingFileHelper, CoolApi.MOD_ID));
+        generator.addProvider(event.includeServer(), new CAPIItemModelGenerator(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new CAPIGlobalLootModifiersGenerator(packOutput));
 
         CAPIBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),

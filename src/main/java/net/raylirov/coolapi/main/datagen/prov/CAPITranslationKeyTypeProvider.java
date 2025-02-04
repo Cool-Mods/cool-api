@@ -7,4 +7,9 @@ public enum CAPITranslationKeyTypeProvider {
     UPGRADE;
 
     public interface TranslationKeySubType{}
+
+    public enum AdvancementKeySubType implements TranslationKeySubType{
+        TITLE,
+        DESCRIPTION
+    }
 }
