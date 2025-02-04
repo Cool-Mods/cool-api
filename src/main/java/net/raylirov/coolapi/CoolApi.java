@@ -2,7 +2,8 @@ package net.raylirov.coolapi;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.raylirov.coolapi.content.CAPIItems;
+import net.fabricmc.loader.api.FabricLoader;
+import net.raylirov.coolapi.content.CAPITemplates;
 import net.raylirov.coolapi.main.utils.CAPILootTableModifiers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,9 @@ public class CoolApi implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		CAPIItems.registerModItems();
-		CAPILootTableModifiers.modifyLootTables();
+		if (FabricLoader.getInstance().isModLoaded("coolarmor") || FabricLoader.getInstance().isModLoaded("coolarmorexperiments")) {
+			CAPITemplates.registerModItems();
+			CAPILootTableModifiers.modifyLootTables();
+		}
 	}
 }

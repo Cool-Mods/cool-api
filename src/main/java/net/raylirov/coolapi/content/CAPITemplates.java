@@ -8,9 +8,9 @@ import net.minecraft.util.Identifier;
 import net.raylirov.coolapi.CoolApi;
 import net.raylirov.coolapi.main.utils.*;
 
-public class CAPIItems {
+public class CAPITemplates {
 
-    public static final Item LEATHER_UPGRADE_SMITHING_TEMPLATE = registerItem("leather_upgrade_smithing_template",
+    public static final Item LEATHER_UPGRADE_SMITHING_TEMPLATE = registerTemplateItem("leather_upgrade_smithing_template",
             new SmithingTemplateItem(CAPIHelper.LEATHER_UPGRADE_APPLIES_TO,
                     CAPIHelper.LEATHER_UPGRADE_INGREDIENTS,
                     CAPIHelper.LEATHER_UPGRADE,
@@ -19,7 +19,7 @@ public class CAPIItems {
                     CAPIHelper.createUpgradeFullArmorIconList,
                     CAPIHelper.createLeatherUpgradeMaterialList));
 
-    public static final Item TURTLE_UPGRADE_SMITHING_TEMPLATE = registerItem("turtle_upgrade_smithing_template",
+    public static final Item TURTLE_UPGRADE_SMITHING_TEMPLATE = registerTemplateItem("turtle_upgrade_smithing_template",
             new SmithingTemplateItem(CAPIHelper.TURTLE_UPGRADE_APPLIES_TO,
                     CAPIHelper.TURTLE_UPGRADE_INGREDIENTS,
                     CAPIHelper.TURTLE_UPGRADE,
@@ -28,7 +28,7 @@ public class CAPIItems {
                     CAPIHelper.createUpgradeFullArmorIconList,
                     CAPIHelper.createTurtleUpgradeMaterialList));
 
-    public static final Item GILDED_UPGRADE_SMITHING_TEMPLATE = registerItem("gilded_upgrade_smithing_template",
+    public static final Item GILDED_UPGRADE_SMITHING_TEMPLATE = registerTemplateItem("gilded_upgrade_smithing_template",
             new SmithingTemplateItem(CAPIHelper.GILDED_UPGRADE_APPLIES_TO,
                     CAPIHelper.GILDED_UPGRADE_INGREDIENTS,
                     CAPIHelper.GILDED_UPGRADE,
@@ -37,7 +37,7 @@ public class CAPIItems {
                     CAPIHelper.createUpgradeFullArmorIconList,
                     CAPIHelper.createIngotUpgradeMaterialList));
 
-    public static final Item WOOLED_UPGRADE_SMITHING_TEMPLATE = registerItem("wooled_upgrade_smithing_template",
+    public static final Item WOOLED_UPGRADE_SMITHING_TEMPLATE = registerTemplateItem("wooled_upgrade_smithing_template",
             new SmithingTemplateItem(CAPIHelper.WOOLED_UPGRADE_APPLIES_TO,
                     CAPIHelper.WOOLED_UPGRADE_INGREDIENTS,
                     CAPIHelper.WOOLED_UPGRADE,
@@ -46,7 +46,7 @@ public class CAPIItems {
                     CAPIHelper.createUpgradeBootsIconList,
                     CAPIHelper.createBlockUpgradeMaterialList));
 
-    public static final Item TINTED_UPGRADE_SMITHING_TEMPLATE = registerItem("tinted_upgrade_smithing_template",
+    public static final Item TINTED_UPGRADE_SMITHING_TEMPLATE = registerTemplateItem("tinted_upgrade_smithing_template",
             new SmithingTemplateItem(CAPIHelper.TINTED_UPGRADE_APPLIES_TO,
                     CAPIHelper.TINTED_UPGRADE_INGREDIENTS,
                     CAPIHelper.TINTED_UPGRADE,
@@ -55,8 +55,7 @@ public class CAPIItems {
                     CAPIHelper.createUpgradeHelmetIconList,
                     CAPIHelper.createAmethystUpgradeMaterialList));
 
-
-    public static Item registerItem(String name, Item item) {
+    public static Item registerTemplateItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(CoolApi.MOD_ID, name), item);
     }
 

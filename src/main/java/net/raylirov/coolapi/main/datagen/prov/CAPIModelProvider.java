@@ -1,4 +1,4 @@
-package net.raylirov.coolapi.main.datagen;
+package net.raylirov.coolapi.main.datagen.prov;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -11,8 +11,6 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.raylirov.coolapi.CoolApi;
-import net.raylirov.coolapi.content.CAPIItems;
 import net.raylirov.coolapi.main.utils.CAPIHelper;
 
 import java.util.List;
@@ -21,52 +19,39 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class CAPIItemModelGenerator extends FabricModelProvider {
-
+public abstract class CAPIModelProvider extends FabricModelProvider {
+    
     public static final TextureKey LAYER3 = TextureKey.of("layer3");
     public static final Model GENERATED_FOUR_LAYERS = item("generated", TextureKey.LAYER0, TextureKey.LAYER1, TextureKey.LAYER2, LAYER3);
-
-    public CAPIItemModelGenerator(FabricDataOutput output) {
+    protected final String modID;
+    
+    public CAPIModelProvider(FabricDataOutput output, String _modID) {
         super(output);
+        modID = _modID;
     }
-
+    
     private static Model item(String parent, TextureKey... requiredTextureKeys) {
         return new Model(Optional.of(new Identifier("minecraft", "item/" + parent)), Optional.empty(), requiredTextureKeys);
     }
 
-    private static final List<TrimMaterial> TRIM_MATERIALS = List.of(
-            new TrimMaterial("quartz", 0.1F, Map.of()),
-            new TrimMaterial("iron", 0.2F, Map.of(ArmorMaterials.IRON, "iron_darker")),
-            new TrimMaterial("netherite", 0.3F, Map.of(ArmorMaterials.NETHERITE, "netherite_darker")),
-            new TrimMaterial("redstone", 0.4F, Map.of()),
-            new TrimMaterial("copper", 0.5F, Map.of()),
-            new TrimMaterial("gold", 0.6F, Map.of(ArmorMaterials.GOLD, "gold_darker")),
-            new TrimMaterial("emerald", 0.7F, Map.of()),
-            new TrimMaterial("diamond", 0.8F, Map.of(ArmorMaterials.DIAMOND, "diamond_darker")),
-            new TrimMaterial("lapis", 0.9F, Map.of()),
-            new TrimMaterial("amethyst", 1.0F, Map.of())
+    private static final List<CAPIModelProvider.TrimMaterial> TRIM_MATERIALS = List.of(
+            new CAPIModelProvider.TrimMaterial("quartz", 0.1F, Map.of()),
+            new CAPIModelProvider.TrimMaterial("iron", 0.2F, Map.of(ArmorMaterials.IRON, "iron_darker")),
+            new CAPIModelProvider.TrimMaterial("netherite", 0.3F, Map.of(ArmorMaterials.NETHERITE, "netherite_darker")),
+            new CAPIModelProvider.TrimMaterial("redstone", 0.4F, Map.of()),
+            new CAPIModelProvider.TrimMaterial("copper", 0.5F, Map.of()),
+            new CAPIModelProvider.TrimMaterial("gold", 0.6F, Map.of(ArmorMaterials.GOLD, "gold_darker")),
+            new CAPIModelProvider.TrimMaterial("emerald", 0.7F, Map.of()),
+            new CAPIModelProvider.TrimMaterial("diamond", 0.8F, Map.of(ArmorMaterials.DIAMOND, "diamond_darker")),
+            new CAPIModelProvider.TrimMaterial("lapis", 0.9F, Map.of()),
+            new CAPIModelProvider.TrimMaterial("amethyst", 1.0F, Map.of())
     );
-
-    @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-
-    }
-
-    @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        simpleItem(CAPIItems.GILDED_UPGRADE_SMITHING_TEMPLATE, itemModelGenerator.writer);
-        simpleItem(CAPIItems.TURTLE_UPGRADE_SMITHING_TEMPLATE, itemModelGenerator.writer);
-        simpleItem(CAPIItems.LEATHER_UPGRADE_SMITHING_TEMPLATE, itemModelGenerator.writer);
-        simpleItem(CAPIItems.TINTED_UPGRADE_SMITHING_TEMPLATE, itemModelGenerator.writer);
-        simpleItem(CAPIItems.WOOLED_UPGRADE_SMITHING_TEMPLATE, itemModelGenerator.writer);
-    }
 
     record TrimMaterial(String name, float itemModelIndex, Map<ArmorMaterial, String> overrideArmorMaterials) {
         public String getAppliedName(ArmorMaterial armorMaterial) {
             return this.overrideArmorMaterials.getOrDefault(armorMaterial, this.name);
         }
     }
-
 
     protected void trimmedArmorItem(List<Item> items, List<ArmorMaterial> leatherList, ArmorMaterial leatherTintedMaterial, List<ArmorMaterial> tintedList, ArmorMaterial wooledMaterial, BiConsumer<Identifier, Supplier<JsonElement>> writer) {
         for (Item item : items)
@@ -76,12 +61,12 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
                 Identifier identifier2 = TextureMap.getId(armorItem);
                 if (CAPIHelper.trimArmor(armorItem, leatherList, wooledMaterial, tintedList)) {
                     Identifier identifier3 = TextureMap.getSubId(armorItem, "_overlay");
-                    Identifier identifierTintedHelmet = new Identifier(CoolApi.MOD_ID, "item/tinted_helmet_overlay");
+                    Identifier identifierTintedHelmet = new Identifier(modID, "item/tinted_helmet_overlay");
                     if (CAPIHelper.isOneOfArmor(armorItem, leatherList)) {
                         if (CAPIHelper.isNeededArmorPiece(armorItem, leatherTintedMaterial)) {
                             Models.GENERATED_THREE_LAYERS
                                     .upload(identifier, TextureMap.layered(identifier2, identifier3, identifierTintedHelmet), writer, (id, textures) -> this.createArmorJson(id, textures, armorItem.getMaterial()));
-                            for (TrimMaterial trimMaterial : TRIM_MATERIALS) {
+                            for (CAPIModelProvider.TrimMaterial trimMaterial : TRIM_MATERIALS) {
                                 String string = trimMaterial.getAppliedName(armorItem.getMaterial());
                                 Identifier identifier4 = this.suffixTrim(identifier, string);
                                 String string2 = armorItem.getType().getName() + "_trim_" + string;
@@ -89,10 +74,10 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
                                 uploadArmor(identifier4, identifier2, identifier3, identifierTintedHelmet, identifier5, writer);
                             }
                         } else {
-                            Identifier identifierLeathered = new Identifier(CoolApi.MOD_ID, "item/leathered_" + armorItem.getType().toString().toLowerCase() +  "_overlay");
+                            Identifier identifierLeathered = new Identifier(modID, "item/leathered_" + armorItem.getType().toString().toLowerCase() +  "_overlay");
                             Models.GENERATED_TWO_LAYERS
                                     .upload(identifier, TextureMap.layered(identifierLeathered, identifier2, identifier3), writer, (id, textures) -> this.createArmorJson(id, textures, armorItem.getMaterial()));
-                            for (TrimMaterial trimMaterial : TRIM_MATERIALS) {
+                            for (CAPIModelProvider.TrimMaterial trimMaterial : TRIM_MATERIALS) {
                                 String string = trimMaterial.getAppliedName(armorItem.getMaterial());
                                 Identifier identifier4 = this.suffixTrim(identifier, string);
                                 String string2 = armorItem.getType().getName() + "_trim_" + string;
@@ -104,7 +89,7 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
                     } else if (CAPIHelper.isOneOfArmor(armorItem, tintedList)) {
                         Models.GENERATED_TWO_LAYERS
                                 .upload(identifier, TextureMap.layered(identifier2, identifierTintedHelmet), writer, (id, textures) -> this.createArmorJson(id, textures, armorItem.getMaterial()));
-                        for (TrimMaterial trimMaterial : TRIM_MATERIALS) {
+                        for (CAPIModelProvider.TrimMaterial trimMaterial : TRIM_MATERIALS) {
                             String string = trimMaterial.getAppliedName(armorItem.getMaterial());
                             Identifier identifier4 = this.suffixTrim(identifier, string);
                             String string2 = armorItem.getType().getName() + "_trim_" + string;
@@ -112,10 +97,10 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
                             uploadArmor(identifier4, identifier2, identifierTintedHelmet, identifier5, writer);
                         }
                     } else if (CAPIHelper.isNeededArmorPiece(armorItem, wooledMaterial)) {
-                        Identifier identifierWooledBoots = new Identifier(CoolApi.MOD_ID, "item/wooled_boots_overlay");
+                        Identifier identifierWooledBoots = new Identifier(modID, "item/wooled_boots_overlay");
                         Models.GENERATED_TWO_LAYERS
                                 .upload(identifier, TextureMap.layered(identifierWooledBoots, identifier2), writer, (id, textures) -> this.createArmorJson(id, textures, armorItem.getMaterial()));
-                        for (TrimMaterial trimMaterial : TRIM_MATERIALS) {
+                        for (CAPIModelProvider.TrimMaterial trimMaterial : TRIM_MATERIALS) {
                             String string = trimMaterial.getAppliedName(armorItem.getMaterial());
                             Identifier identifier4 = this.suffixTrim(identifier, string);
                             String string2 = armorItem.getType().getName() + "_trim_" + string;
@@ -126,7 +111,7 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
                 } else {
                     Models.GENERATED
                             .upload(identifier, TextureMap.layer0(identifier2), writer, (id, textures) -> this.createArmorJson(id, textures, armorItem.getMaterial()));
-                    for (TrimMaterial trimMaterial : TRIM_MATERIALS) {
+                    for (CAPIModelProvider.TrimMaterial trimMaterial : TRIM_MATERIALS) {
                         String string = trimMaterial.getAppliedName(armorItem.getMaterial());
                         Identifier identifier4 = this.suffixTrim(identifier, string);
                         String string2 = armorItem.getType().getName() + "_trim_" + string;
@@ -162,7 +147,7 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
     public final JsonObject createArmorJson(Identifier id, Map<TextureKey, Identifier> textures, ArmorMaterial armorMaterial) {
         JsonObject jsonObject = Models.GENERATED_TWO_LAYERS.createJson(id, textures);
         JsonArray jsonArray = new JsonArray();
-        for (TrimMaterial trimMaterial : TRIM_MATERIALS) {
+        for (CAPIModelProvider.TrimMaterial trimMaterial : TRIM_MATERIALS) {
             JsonObject jsonObject2 = new JsonObject();
             JsonObject jsonObject3 = new JsonObject();
             jsonObject3.addProperty(ItemModelGenerator.TRIM_TYPE.getPath(), trimMaterial.itemModelIndex());
@@ -177,4 +162,5 @@ public class CAPIItemModelGenerator extends FabricModelProvider {
     protected void simpleItem(Item item, BiConsumer<Identifier, Supplier<JsonElement>> writer) {
         Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(item), writer);
     }
+
 }

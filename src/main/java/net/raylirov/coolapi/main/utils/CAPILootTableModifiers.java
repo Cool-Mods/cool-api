@@ -8,7 +8,7 @@ import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
-import net.raylirov.coolapi.content.CAPIItems;
+import net.raylirov.coolapi.content.CAPITemplates;
 
 public class CAPILootTableModifiers {
 
@@ -29,7 +29,7 @@ public class CAPILootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(1f))
-                        .with(ItemEntry.builder(CAPIItems.LEATHER_UPGRADE_SMITHING_TEMPLATE))
+                        .with(ItemEntry.builder(CAPITemplates.LEATHER_UPGRADE_SMITHING_TEMPLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -39,7 +39,7 @@ public class CAPILootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(1f))
-                        .with(ItemEntry.builder(CAPIItems.TURTLE_UPGRADE_SMITHING_TEMPLATE))
+                        .with(ItemEntry.builder(CAPITemplates.TURTLE_UPGRADE_SMITHING_TEMPLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -49,7 +49,7 @@ public class CAPILootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(1f))
-                        .with(ItemEntry.builder(CAPIItems.GILDED_UPGRADE_SMITHING_TEMPLATE))
+                        .with(ItemEntry.builder(CAPITemplates.GILDED_UPGRADE_SMITHING_TEMPLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -59,7 +59,7 @@ public class CAPILootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(1f))
-                        .with(ItemEntry.builder(CAPIItems.WOOLED_UPGRADE_SMITHING_TEMPLATE))
+                        .with(ItemEntry.builder(CAPITemplates.WOOLED_UPGRADE_SMITHING_TEMPLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -69,7 +69,7 @@ public class CAPILootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(1f))
-                        .with(ItemEntry.builder(CAPIItems.TINTED_UPGRADE_SMITHING_TEMPLATE))
+                        .with(ItemEntry.builder(CAPITemplates.TINTED_UPGRADE_SMITHING_TEMPLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());

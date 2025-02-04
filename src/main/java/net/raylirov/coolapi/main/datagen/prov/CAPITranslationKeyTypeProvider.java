@@ -1,4 +1,4 @@
-package net.raylirov.coolapi.main.datagen.lang;
+package net.raylirov.coolapi.main.datagen.prov;
 
 public enum CAPITranslationKeyTypeProvider {
     ADVANCEMENT,

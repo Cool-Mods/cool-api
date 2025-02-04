@@ -9,7 +9,7 @@
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/rays-cool-api",
-		"sources": ""
+		"sources": "https://github.com/Cool-Mods/cool-api"
 	},
 	"license": "GPL-3.0",
 	"icon": "assets/coolapi/icon.gif",
